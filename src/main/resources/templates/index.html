@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>flow_test_index_page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .my-box {
+            border: 1px solid;
+            padding: 10px;
+            width: 500px;
+            height: 200px;
+            display: inline-block;
+            max-width: 1000px;
+        }
+
+        .submit-btn {
+            border: 1px solid;
+            padding: 3px;
+        }
+
+        .customsBoxSize {
+            height: 50px;
+        }
+
+        .CustomList {
+            max-width: 1000px;
+        }
+
+        .wrapper {
+            width: 1000px;
+            height: 800px;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .custom-wrapper {
+            width: 800px;
+            height: 50px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .custom-wrapper-text {
+            display: inline-block;
+            width: 150px;
+            font-size: 1.2em;
+        }
+        .fixed-wrapper-text{
+            display: inline-block;
+            width: 150px;
+            font-size: 1.2em;
+        }
+        .textarea-wrapper-notext{
+            display: inline-block;
+            width: 150px;
+        }
+
+        .form-control {
+            width: 300px;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <hr style="border: solid 1px black;">
+    <h1>※파일 확장자 차단</h1>
+    <hr style="border: solid 3px black;">
+    <h4>파일 확장자에 따라 특정 형식의 파일을 첨부하거나 전송 하지 못하도록 제한</h4>
+    <br>
+    <div>
+        <span class="fixed-wrapper-text">고정 확장자</span>
+        <label><input id="bat" type="checkbox"> bat  &nbsp;&nbsp;</label>
+        <label><input id="cmd" type="checkbox"> cmd  &nbsp;&nbsp;</label>
+        <label><input id="com" type="checkbox"> com  &nbsp;&nbsp;</label>
+        <label><input id="cpl" type="checkbox"> cpl  &nbsp;&nbsp;</label>
+        <label><input id="exe" type="checkbox"> exe  &nbsp;&nbsp;</label>
+        <label><input id="scr" type="checkbox"> scr  &nbsp;&nbsp;</label>
+        <label><input id="js" type="checkbox"> js</label>
+
+        <div>
+            <div class="custom-wrapper">
+                <div class="custom-wrapper-text">커스텀 확장자</div>
+
+                <input id="customName" type="text" class="form-control" placeholder="커스텀 확장자 입력"
+                       aria-describedby="basic-addon2">
+
+                <span class="submit-btn" id="customInsert" name="customInsert" type="button"
+                      onclick="insertCustom()">
+                        +추가
+                    </span>
+
+            </div>
+        </div>
+        <div class="textarea-wrapper-notext"></div>
+        <div class="my-box" id="customsBox">
+            <div class="customsBoxSize">
+                <span id="customsBoxSize"></span> <span> / 200</span>
+            </div>
+            <!--        <input class="CustomList"-->
+            <!--               id="CustomList"-->
+            <!--               type='button'-->
+            <!--               value='a'-->
+            <!--        />-->
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+
+    /*
+    * fix 류
+    * */
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/fixes/find-true",
+            success: function (response) {
+                let dataList = response
+                for (let i = 0; i < dataList.length; i++) {
+                    if (dataList[i].names.value === "bat") {
+                        $("#bat").prop("checked", true)
+                    } else if (dataList[i].names.value === "cmd") {
+                        $("#cmd").prop("checked", true)
+                    } else if (dataList[i].names.value === "com") {
+                        $("#com").prop("checked", true)
+                    } else if (dataList[i].names.value === "cpl") {
+                        $("#cpl").prop("checked", true)
+                    } else if (dataList[i].names.value === "exe") {
+                        $("#exe").prop("checked", true)
+                    } else if (dataList[i].names.value === "scr") {
+                        $("#scr").prop("checked", true)
+                    } else if (dataList[i].names.value === "js") {
+                        $("#js").prop("checked", true)
+                    }
+                }
+            }
+        })
+    });
+    $(document).ready(function () {
+        $("#js").change(function () {
+            if ($("#js").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "js"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "js"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#scr").change(function () {
+            if ($("#scr").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "scr"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "scr"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#exe").change(function () {
+            if ($("#exe").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "exe"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "exe"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#cpl").change(function () {
+            if ($("#cpl").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "cpl"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "cpl"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#com").change(function () {
+            if ($("#com").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "com"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "com"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#cmd").change(function () {
+            if ($("#cmd").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "cmd"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "cmd"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#bat").change(function () {
+            if ($("#bat").is(":checked")) {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "bat"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    url: '/fixes/update',
+                    data: JSON.stringify({
+                        "names": "bat"
+                    }),
+                    success: function (response) {
+                        alert("extension is inserted")
+                    }
+                })
+            }
+        });
+    });
+
+    /*
+    * Custom 류
+    * */
+    //GET
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/customs/find-true",
+            success: function (res) {
+                let list = res;
+                let listSize = list.length;
+                for (let i = 0; i < list.length; i++) {
+
+                    let names = list[i]['names'];
+                    let tmp = `
+                    <input class="CustomList"
+                             id="${names}"
+                             type='button'
+                             value='${names} Χ'
+                             onclick="updateCustom(${names})"
+                              /> `
+                    $('#customsBox').append(tmp);
+                }
+
+                let tempSize = `
+                <span id="customsBoxSize">${listSize}</span>`
+
+                $('#customsBoxSize').append(tempSize);
+            }
+        })
+    });
+
+
+    //POST
+
+    //post시 이미 존재하는 name일 경우 alert
+    function errorAlert() {
+        alert("이미 존재하는 확장자입니다.")
+    }
+
+    //Enter 입력
+    $("input[type=text]").on('keyup', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            $("#customInsert").trigger('click');
+        }
+    })
+
+    function insertCustom() {
+        let customName = $('#customName').val().trim();
+        var expression = RegExp(/[^a-z]/);
+
+        if (customName.length > 20 || customName.length === 0) {
+            alert("You can enter between 0 and 20 characters.")
+        } else if (customName === "bat" || customName === "cmd" ||
+            customName === "com" || customName === "cpl" || customName === "exe" || customName === "scr" || customName === "js") {
+            alert(customName + "는 체크 박스에 있는 확장자입니다. 체크박스를 선택 해서 추가해주세요")
+            $('#customName').clear();
+        }else if(expression.test(customName)){
+            alert("소문자 영문만 입력 가능합니다.")
+        } else {
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                url: '/customs/save',
+                data: JSON.stringify({
+                    "names": $('#customName').val().trim()
+                }),
+                success: function (response) {
+                    let numberOfRes = response;
+                    if (numberOfRes === 1) {
+                        alert("extension is inserted")
+                    } else {
+                        errorAlert();
+                    }
+                }
+            })
+        }
+        window.location.reload(true);
+    }
+
+    // onmouseover="updateCustom(this)"
+    //put 매핑
+    function updateCustom(e) {
+        let updateObj = document.getElementById(e.getAttribute('id')).getAttribute('id')
+        $.ajax({
+            type: 'PUT',
+            dataType: "json",
+            contentType: 'application/json;charset=utf-8',
+            url: '/customs/update',
+            data: JSON.stringify({
+                "names": document.getElementById(e.getAttribute('id')).getAttribute('id')
+            }),
+            success: function (response) {
+                alert("삭제되었습니다.")
+            }
+        })
+        window.location.reload(true);
+    }
+</script>
+</html>
