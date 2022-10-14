@@ -75,21 +75,21 @@ URL | Method | 비고
 | `/customs/save	` | `POST` | res: 1 , 0 | 
 | `/customs/update` | `PUT` | flag = false | 
 
-##시퀀스 다이어 그램
+## 시퀀스 다이어 그램
 
-####고정 확장자 출력
+#### 고정 확장자 출력
 ![fixidGET](https://user-images.githubusercontent.com/84306157/195940801-2267abbd-1cf0-489a-914c-9bd011131885.png)
 
-####고정 확장자 저장 또는 수정
+#### 고정 확장자 저장 또는 수정
 ![fixedPut](https://user-images.githubusercontent.com/84306157/195940826-45d05ea2-d3f1-4040-9b72-3e2c775278dc.png)
 
-####커스텀 확장자 출력
+#### 커스텀 확장자 출력
 ![CustomGet](https://user-images.githubusercontent.com/84306157/195940843-2104dc57-de0e-4d14-8020-086345c28f99.png)
 
-####커스텀 확장자 저장 
+#### 커스텀 확장자 저장 
 ![CustomSave](https://user-images.githubusercontent.com/84306157/195940865-403ade4b-6ff2-4c39-87e1-90c456c4d57d.png)
 
-####커스텀 확장자 수정
+#### 커스텀 확장자 수정
 ![customupdate](https://user-images.githubusercontent.com/84306157/195940879-b6bf38e3-2bc1-419a-9d81-f87e9201552f.png)
 
 
