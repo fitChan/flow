@@ -139,4 +139,11 @@ class CustomExServiceTest {
         //then
         Assertions.assertThat(customExtension.isFlag()).isTrue();
     }
+    @Test
+    @DisplayName("커스텀 확장자에 고정확장자를 넣엇을 경우")
+    void wrongInputNotCustom() {
+        Assertions.assertThatThrownBy(() ->
+                customExService.create(new CustomResponse("bat")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

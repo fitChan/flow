@@ -28,6 +28,7 @@ public class FixedExService {
 
     @Transactional
     public void findByNames(FixedResponse fixedResponse) {
+        exceptionThow(fixedResponse);
         try {
             FixedExtension byNames = fixedExRepository.findByNames(fixedResponse.getNames());
             byNames.update(fixedResponse);
@@ -37,6 +38,18 @@ public class FixedExService {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
             FixedExtension map = modelMapper.map(fixedResponse, FixedExtension.class);
             fixedExRepository.save(map);
+        }
+    }
+
+    private void exceptionThow(FixedResponse fixedResponse) {
+        if(!fixedResponse.getNames().equals(FixedEnum.BAT) ||
+                !fixedResponse.getNames().equals(FixedEnum.EXE)||
+                !fixedResponse.getNames().equals(FixedEnum.CMD)||
+                !fixedResponse.getNames().equals(FixedEnum.COM)||
+                !fixedResponse.getNames().equals(FixedEnum.SCR)||
+                !fixedResponse.getNames().equals(FixedEnum.CPL) ||
+                !fixedResponse.getNames().equals(FixedEnum.JS)){
+            throw new IllegalArgumentException("적합하지 않은 입력입니다.");
         }
     }
 }

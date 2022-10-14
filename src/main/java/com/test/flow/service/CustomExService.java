@@ -1,7 +1,9 @@
 package com.test.flow.service;
 
 import com.test.flow.domain.CustomExtension;
+import com.test.flow.domain.enums.FixedEnum;
 import com.test.flow.dto.CustomResponse;
+import com.test.flow.dto.FixedResponse;
 import com.test.flow.repository.CustomExRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -29,6 +31,7 @@ public class CustomExService {
     //create
     @Transactional
     public int create(CustomResponse customResponse) {
+        exceptionThow(customResponse);
         Optional<CustomExtension> byNames = customRepository.findByNames(customResponse.getNames());
         if (byNames.isEmpty()) {
             ModelMapper modelMapper = new ModelMapper();
@@ -63,6 +66,18 @@ public class CustomExService {
             return true;
         }else{
             throw new IllegalStateException("예외 발생");
+        }
+    }
+
+    private void exceptionThow(CustomResponse customResponse) {
+        if(customResponse.getNames().equals("bat") ||
+                customResponse.getNames().equals("exe")||
+                customResponse.getNames().equals("cmd")||
+                customResponse.getNames().equals("com")||
+                customResponse.getNames().equals("scr")||
+                customResponse.getNames().equals("cpl") ||
+                customResponse.getNames().equals("js")){
+            throw new IllegalArgumentException("적합하지 않은 입력입니다.");
         }
     }
 }
