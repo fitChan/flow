@@ -62,13 +62,13 @@ class FixedExServiceTest {
         Assertions.assertThat(allByFlagTrue.get(0).getNames()).isEqualTo(FixedEnum.CMD);
     }
 
-    @Test
-    @DisplayName("적합하지 않은 고정 확장자")
-    void extensionError(){
-        Assertions.assertThatThrownBy(
-                ()-> fixedExService.findByNames(new FixedResponse(FixedEnum.valueOf("notExistEnum")))
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
+//    @Test
+//    @DisplayName("적합하지 않은 고정 확장자")
+//    void extensionError(){
+//        Assertions.assertThatThrownBy(
+//                ()-> fixedExService.findByNames(new FixedResponse(FixedEnum.valueOf("notExistEnum")))
+//        ).isInstanceOf(IllegalArgumentException.class);
+//    }
 
 
 
