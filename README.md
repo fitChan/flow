@@ -66,7 +66,7 @@ URL | Method | Req |Res |비고
 
 URL | Method |Req |Res |비고
 |:---:|:---:|:---|:---:|:---:|
-| `/customs/find-true` | `GET` | - | [<br>{<br>"name": "example"<br>}<br>,<br>{<br>"name": "test"<br>}<br>,<br>{<br>"name": "chanwoo"<br>}<br>] | flag=true 이고 list의 limit le = 200 |  
+| `/customs/find-true` | `GET` | - | [<br>{<br>"name": "example"<br>}<br>,<br>{<br>"name": "test"<br>}<br>,<br>{<br>"name": "chanwoo"<br>}<br>] | flag=true 이고 list의 limit length = 200 |  
 | `/customs/save    ` | `POST` | { "name": "example" } | 1 or 0 (int)  | res[1]: db에 존재하지않음 또는 존재하지만 flag가false res[2]: db에 존재 하지만 flag가 true| 
 | `/customs/update` | `PUT` | { "name": "example" } | - |"name": "example" "flag : false " 로 수정| 
 
