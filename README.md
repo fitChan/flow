@@ -59,14 +59,14 @@ hello
 
 URL | Method | Req |Res |비고
 |:---:|:---:|:---|:---|:---:|
-| `/fixes/find-true` | `GET` | = | [<br>{<br>"names:<br>{<br>"value": "bat"<br>}<br>},{<br>"names:<br>{<br>"value": "com"<br>}<br>} <br>] |  |  
+| `/fixes/find-true` | `GET` | = | [<br>&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"names:&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": "bat"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"names:&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": "com"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;}<br>] |  |  
 | `/fixes/update` | `PUT` | {"names": "cpl"} | 200OK |flag = false-> true , true -> false | 
 
 <strong><u> custom_extension </u></strong>
 
 URL | Method |Req |Res |비고
 |:---:|:---:|:---|:---|:---:|
-| `/customs/find-true` | `GET` | - | [<br>{<br>"name": "example"<br>}<br>,<br>{<br>"name": "test"<br>}<br>,<br>{<br>"name": "chanwoo"<br>}<br>] | flag=true 이고 list의 limit length = 200 |  
+| `/customs/find-true` | `GET` | - | [<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "example"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "example"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "example"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>] | flag=true 이고 list의 limit length = 200 |  
 | `/customs/save    ` | `POST` | { "name": "example" } | 1 or 0 (int)  | res[1]: db에 존재하지않음 또는 존재하지만 flag가false res[2]: db에 존재 하지만 flag가 true| 
 | `/customs/update` | `PUT` | { "name": "example" } | - |"name": "example" "flag : false " 로 수정| 
 
