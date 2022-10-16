@@ -35,7 +35,7 @@ hello
 |---|:---:|---:|
 | `id` | PK값 | `Integer` |
 | `create_at` | 생성 시간 | `DATETIME` |
-| `modified_at` | 수정 시간 / 배치 불가능 | `DATETIME` |
+| `modified_at` | 수정 시간  | `DATETIME` |
 | `flag` | 해당 컬럼 사용 유무 | `BOOLEAN` |
 | `names` | 고정 확장자 명 | `STRING` |
 
@@ -45,7 +45,7 @@ hello
 |---|:---:|---:|
 | `id` | PK값 | `Integer` |
 | `create_at` | 생성 시간 | `DATETIME` |
-| `modified_at` | 수정 시간 / 배치 불가능 | `DATETIME` |
+| `modified_at` | 수정 시간 | `DATETIME` |
 | `flag` | 해당 컬럼 사용 유무 | `BOOLEAN` |
 | `names` | custom 확장자 명 | `STRING` |
 
@@ -70,14 +70,13 @@ URL | Method |Req |Res |비고
 | `/customs/save    ` | `POST` | { "name": "example" } | 1 or 0 (int)  | res[1]: db에 존재하지않음 또는 존재하지만 flag가false res[2]: db에 존재 하지만 flag가 true| 
 | `/customs/update` | `PUT` | { "name": "example" } | - |"name": "example" "flag : false " 로 수정| 
 
-## 시퀀스 다이어 그램
+## 시퀀스 다이어그램
 
 #### 고정 확장자 출력
 
 ![fixidGET](https://user-images.githubusercontent.com/84306157/195940801-2267abbd-1cf0-489a-914c-9bd011131885.png)
 
 #### 고정 확장자 저장 또는 수정
-``
 ![fixedPut](https://user-images.githubusercontent.com/84306157/195940826-45d05ea2-d3f1-4040-9b72-3e2c775278dc.png)
 
 #### 커스텀 확장자 출력
